@@ -7,7 +7,7 @@ module LLMs
       subreddits_end: pretty_text("✔ Fetched your recommended subreddits", :green, :bold, :underline),
       subreddits_posts_start: pretty_text("• Fetching subreddits posts from the recommended ones", :blue, :bold),
       subreddits_posts_end: pretty_text("✔ Posts fetched!", :green, :bold, :underline),
-      leads_start: pretty_text("• Finding best leads for  you!", :blue, :bold),
+      leads_start: pretty_text("• Finding best leads for you!", :blue, :bold),
       leads_end: pretty_text("✔ Fetched the leads!", :green, :underline)
     }
 
