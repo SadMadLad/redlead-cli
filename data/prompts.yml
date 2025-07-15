@@ -1,0 +1,41 @@
+lead_finding_prompt: |
+  You are an expert at identifying posts that signal high commercial intent.
+  Rank the following Reddit posts/comments based on how likely a response could convert into a sale, lead, or business opportunity.
+  Prioritize posts where a user is actively asking for recommendations, help, or discussing a pain point that a business could solve.
+
+google_subreddit_recommendation_schema:
+  responseMimeType: application/json
+  responseSchema:
+    type: object
+    properties:
+      resources:
+        type: array
+        description: Recommended subreddits to look through for leads (ranked from best to least), depending on the business description. Recommend about 14-17 such subreddits.
+        items:
+          type: object
+          properties:
+            display_name:
+              type: string
+              description: Display Name of the recommended subreddit
+          required: ["display_name"]
+    required: ["resources"]
+
+google_lead_finding_schema:
+  responseMimeType: application/json
+  responseSchema:
+    type: object
+    properties:
+      resources:
+        type: array
+        description: Rank-ordered list of subreddit posts or comments (most relevant first). Fetch about 15-25 subreddit posts.
+        items:
+          type: object
+          properties:
+            reddit_id:
+              type: string
+              description: ID of the recommeded subreddit post.
+            score:
+              type: number
+              description: Relevance score - How likely this post is capable of being a lead to the business - 0 (worst) to 10 (best).
+          required: ["reddit_id", "score"]
+    required: ["resources"]
