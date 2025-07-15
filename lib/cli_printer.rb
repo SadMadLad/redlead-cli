@@ -33,7 +33,8 @@ module CliPrinter
     ending_text = pretty_text("× Error!", :bold, :red, :bright, :underline) if error
     Thread.kill(spinner_thread)
     print "\r#{ending_text}#{' ' * 20}\n\n"
-    puts error.inspect if error
     $stdout.flush
+
+    raise error if error
   end
 end
