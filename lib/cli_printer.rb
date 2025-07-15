@@ -13,6 +13,7 @@ module CliPrinter
   end
 
   def yield_print(starting_text, ending_text, working_text = nil, &block)
+    error = nil
     puts starting_text
 
     spinner_thread = Thread.new do
@@ -26,9 +27,13 @@ module CliPrinter
     end
 
     block.call
+  rescue => e
+    error = e
   ensure
+    ending_text = pretty_text("× Error!", :bold, :red, :bright, :underline) if error
     Thread.kill(spinner_thread)
     print "\r#{ending_text}#{' ' * 20}\n\n"
+    puts error.inspect if error
     $stdout.flush
   end
 end
