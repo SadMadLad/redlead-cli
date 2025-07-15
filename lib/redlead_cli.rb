@@ -64,7 +64,7 @@ class RedleadCli < Thor
     def validate_llm_model
       raise Thor::Error, "Model not available for the provider, #{@provider}. Available models: #{llms[@provider].join(", ")}" unless model_in_provider?
 
-      pretty_print "Model Setup: #{@model}", :blue, :bold
+      pretty_print "Model Setup: #{@model}", :violet, :bold
     end
 
     def validate_api_key
@@ -77,7 +77,7 @@ class RedleadCli < Thor
 
       raise Thor::Error, "API Key not provded for the provider, #{@provider}. Requested API Key: #{requested_api_key[@provider]}" if provider_api_key.nil?
 
-      pretty_print "API Key found for provider: #{@provider}", :pink, :bold
+      pretty_print "API Key found for provider: #{@provider}", :violet, :bold
     end
 
     def model_in_provider?

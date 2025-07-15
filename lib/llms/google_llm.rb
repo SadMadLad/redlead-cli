@@ -69,7 +69,7 @@ module LLMs
       end
 
       def parse_recommended_subreddits(recommended_subreddits)
-        recommended_subreddits = JSON.parse(recommended_subreddits)["resources"].map{ |resource| resource["display_name"] }
+        recommended_subreddits = JSON.parse(recommended_subreddits)["resources"].map{ |resource| resource["display_name"] }.uniq
         recommended_subreddits.each_slice(3).to_a
       end
 
