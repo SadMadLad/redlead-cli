@@ -1,7 +1,7 @@
 module Constants
   LLMS = {
     "google" => {
-     "models" => ["gemini-2.0-flash", "gemma-3-27b-it", "gemma-3n-e4b"],
+     "models" => ["gemini-1.5-flash-8b", "gemini-2.0-flash", "gemma-3-27b-it", "gemma-3n-e4b"],
      "class" => ::Langchain::LLM::GoogleGemini
     }
   }.freeze

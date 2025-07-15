@@ -13,11 +13,8 @@ loader.inflector.inflect(
 loader.setup
 
 include Constants
+include CliPrinter
 
 Langchain.logger.level = Logger::FATAL
 
-leads = LLMs::GoogleLLM.new("gemini-2.0-flash").find_leads("We sell shoes, from heals to boots to sneakers and everything in-between!")
-
-binding.pry
-
-# RedleadCli.start(ARGV)
+RedleadCli.start(ARGV)
