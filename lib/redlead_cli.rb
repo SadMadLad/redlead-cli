@@ -21,16 +21,13 @@ class RedleadCli < Thor
     required: true,
     enum: available_llm_models,
     desc: "The LLM Model"
-  option :subreddits,
-    aliases: "-s",
-    type: :array,
-    desc: "Specific subreddits to find leads from"
   option :business_prompt,
     aliases: "-b",
     type: :string,
     required:  true,
     desc: "Business prompt: What the business provides, its products and services."
   option :save,
+    aliases: "-s",
     type: :boolean,
     default: true,
     desc: "Save the leads"

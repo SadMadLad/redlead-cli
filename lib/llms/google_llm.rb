@@ -2,15 +2,6 @@ module LLMs
   class GoogleLLM < LLM
     provider "google"
 
-    NOTIFICATION_TEXTS = {
-      subreddits_start: pretty_text("\n• Getting your recommended subreddits", :blue, :bold),
-      subreddits_end: pretty_text("✔ Fetched your recommended subreddits", :green, :bold, :underline),
-      subreddits_posts_start: pretty_text("• Fetching subreddits posts from the recommended ones", :blue, :bold),
-      subreddits_posts_end: pretty_text("✔ Posts fetched!", :green, :bold, :underline),
-      leads_start: pretty_text("• Finding best leads for you!", :blue, :bold),
-      leads_end: pretty_text("✔ Fetched the leads!", :green, :underline)
-    }
-
     def find_leads(business_prompt)
       # Get recommended subreddits
       messages = prepare_subreddit_recommendation_messages business_prompt
@@ -75,7 +66,7 @@ module LLMs
 
       def fetch_subreddits_posts(grouped_recommended_subreddits)
         yield_print(*NOTIFICATION_TEXTS.values_at(:subreddits_posts_start, :subreddits_posts_end)) do
-          grouped_recommended_subreddits.map do |recommended_subreddits|
+          Parallel.map(grouped_recommended_subreddits, in_threads: 5) do |recommended_subreddits|
             Clients::RedditClient[:subreddits_posts, recommended_subreddits]
           end.flatten
         end
